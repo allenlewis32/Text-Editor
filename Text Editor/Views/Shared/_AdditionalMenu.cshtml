@@ -1,0 +1,6 @@
+﻿@if (Context.Session.Get("uEmail") != null)
+{
+	<li class="nav-item">
+		<a class="nav-link text-dark" asp-controller="File" asp-action="Index">Files</a>
+	</li>
+}

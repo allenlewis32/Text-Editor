@@ -1,0 +1,18 @@
+﻿@if (TempData.ContainsKey("error"))
+{
+        <div id="errorMessage" class="alert alert-danger">
+        @TempData["error"]
+            <button class="btn-close" onclick="document.getElementById('errorMessage').remove()"></button>
+        </div>
+        <br/>
+    TempData.Remove("error");
+}
+@if (TempData.ContainsKey("success"))
+{
+    <div id="successMessage" class="alert alert-success">
+        @TempData["success"]
+        <button class="btn-close" onclick="document.getElementById('successMessage').remove()"></button>
+    </div>
+    <br />
+    TempData.Remove("success");
+}

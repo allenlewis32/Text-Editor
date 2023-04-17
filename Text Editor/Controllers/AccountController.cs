@@ -9,7 +9,7 @@ namespace Text_Editor.Controllers
     public class AccountController : Controller
     {
         // GET: Account/Register
-        public ActionResult Register()
+        public IActionResult Register()
         {
             return View();
         }
@@ -17,7 +17,7 @@ namespace Text_Editor.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         // POST: Account/Register
-        public ActionResult Register(RegisterViewModel model)
+        public IActionResult Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -33,10 +33,10 @@ namespace Text_Editor.Controllers
                         cmd.Parameters.AddWithValue("@email", model.Email);
                         cmd.Parameters.AddWithValue("@password", model.Password);
                         cmd.Parameters.AddWithValue("@name", model.Name);
-						cmd.ExecuteNonQuery();
-						HttpContext.Session.SetString("uEmail", model.Email);
-						HttpContext.Session.SetString("uName", model.Name);
-						return RedirectToAction("Index", "Home");
+                        cmd.ExecuteNonQuery();
+                        HttpContext.Session.SetString("uEmail", model.Email);
+                        HttpContext.Session.SetString("uName", model.Name);
+                        return RedirectToAction("Index", "File");
                     }
                     else
                     {
@@ -52,7 +52,7 @@ namespace Text_Editor.Controllers
         }
 
         // GET: Account/Login
-        public ActionResult Login()
+        public IActionResult Login()
         {
             return View();
         }
@@ -60,7 +60,7 @@ namespace Text_Editor.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         // POST: Account/Register
-        public ActionResult Login(LoginViewModel model)
+        public IActionResult Login(LoginViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -73,7 +73,7 @@ namespace Text_Editor.Controllers
                     {
                         HttpContext.Session.SetString("uEmail", model.Email);
                         HttpContext.Session.SetString("uName", reader.GetString(0));
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "File");
                     }
                     else
                     {
@@ -89,7 +89,7 @@ namespace Text_Editor.Controllers
         }
 
         // GET: Account/Logout
-        public ActionResult Logout()
+        public IActionResult Logout()
         {
             HttpContext.Session.Clear();
             return RedirectToAction("Index", "Home");

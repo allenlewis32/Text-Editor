@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Text_Editor.Models.FileModel>
+
+@{
+    ViewData["Title"] = "Files";
+}
+
+<partial name="_MessagePartial" />
+
+<h1>Files</h1>
+
+<script type="text/javascript">
+    function createNew() {
+        var name = prompt("Enter the name of the new file");
+        if(name == null) return;
+        location.href = "@Url.Action("New")" + "?name=" + name;
+    }    
+</script>
+
+<p>
+    <button class="btn btn-primary" onclick="createNew()">New</button>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastAccessed)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <a href="@Url.Action("Edit")?name=@item.Name">@Html.DisplayFor(modelItem => item.Name)</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastAccessed)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
